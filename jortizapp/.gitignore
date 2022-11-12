@@ -27,3 +27,5 @@ coverage
 *.sln
 *.sw?
 jortizapp.code-workspace
+.test.env
+.env
