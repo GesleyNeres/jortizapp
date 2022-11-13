@@ -1,27 +1,27 @@
 import { defineStore } from 'pinia'
 import { http, setBearerToken } from '@/http'
-import { getLocalToken, getLocalClientsPersistent, setLocalClientsPersistent } from '@/modules/services'
+import { getLocalToken, getLocalServicesPersistent, setLocalServicesPersistent } from '@/modules/services'
 import router from "@/router/index"
 
-export const clientStore = defineStore({
-    id: 'client',
+export const serviceStore = defineStore({
+    id: 'service',
     state: () => ({
-        clients: [],
+        services: [],
     }),
     getters: {
-        countClients: (state) => state.clients.length || null
+        countServices: (state) => state.services.length || null
     },
     actions: {
-        async loadClients() {
+        async loadServices() {
             return new Promise(async (resolve, reject) => {
                 try {
-                    if (getLocalClientsPersistent('client')) {
+                    if (getLocalServicesPersistent('service')) {
                         console.log("Carregado do persistente")
-                        this.clients = getLocalClientsPersistent('client')
+                        this.services = getLocalServicesPersistent('service')
                     }else{
                         setBearerToken(getLocalToken())
-                        const {data} = await http.get('/clients')
-                        this.clients = data
+                        const {data} = await http.get('/services')
+                        this.services = data
                     }
                     resolve()
                 } catch (error) {
@@ -35,17 +35,18 @@ export const clientStore = defineStore({
             }
             )
         },
-        async saveClients(form_data){
+        async saveServices(form_data){
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
                     console.log("Token ", getLocalToken())
-                    const {data} = await http.post('/clients', form_data)
+                    const {data} = await http.post('/services', form_data)
                     form_data.uuid = data
-                    this.clients.push(form_data)
-                    setLocalClientsPersistent('client', this.clients)
-                    resolve('Cliente cadastrado com sucesso.')
+                    this.services.push(form_data)
+                    setLocalServicesPersistent('service', this.services)
+                    resolve('Serviço cadastrado com sucesso.')
                 } catch (error) {
+                    console.log("Error obtido ", error)
                     const {response} = error
                     if (response) {
                         reject(response.data.error)

@@ -6,7 +6,11 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 /* import * as bootstrap from 'bootstrap' */
 import * as bootstrap from "bootstrap/dist/css/bootstrap.min.css"
-import {getLocalUserPersistent, setLocalUserPersistent} from '@/modules/services/index.js'
+import { 
+    getLocalUserPersistent, setLocalUserPersistent, 
+    getLocalClientsPersistent, setLocalClientsPersistent,
+    getLocalServicesPersistent, setLocalServicesPersistent
+} from '@/modules/services/index.js'
 
 loadFonts()
 
@@ -25,15 +29,12 @@ pinia.use((context) => {
     }
     
     context.store.$subscribe((mutation, state) => {
-        console.log("State ", state)
       setLocalUserPersistent(loginId, state)
-    })
-      console.log("Passando em main pinia: > ", fromStorage)
-      
+    })     
 
   }
 
-/*   if (context.store.$id == 'client') {
+  if (context.store.$id == 'client') {
 
       const loginId = context.store.$id
 
@@ -47,9 +48,10 @@ pinia.use((context) => {
           setLocalClientsPersistent(loginId, state.clients)
       })
 
-  } */
+      console.log("Passando em main pinia como client: > ", fromStorage)
+  }
 
-/*   if (context.store.$id == 'service') {
+  if (context.store.$id == 'service') {
 
       const loginId = context.store.$id
 
@@ -63,7 +65,7 @@ pinia.use((context) => {
           setLocalServicesPersistent(loginId, state.services)
       })
 
-  } */
+  }
 
 /*   if (context.store.$id == 'employee') {
       

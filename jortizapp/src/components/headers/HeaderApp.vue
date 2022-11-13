@@ -31,7 +31,7 @@
         <template v-slot:prepend>
           <v-icon>mdi-pail</v-icon>
         </template>
-        <router-link :to="{ name: 'service' }" class="nav-link">Serviços</router-link>
+        <router-link :to="{ name: 'service-list' }" class="nav-link">Serviços</router-link>
       </v-list-item>
       <v-list-item link>
         <template v-slot:prepend>

@@ -1,7 +1,8 @@
 import { userStore } from '@/modules/stores/user'
-import { clientStore } from '@/views/stores/index'
+import { clientStore, serviceStore } from '@/views/stores/index'
 
 export default {
   userStore,
   clientStore,
+  serviceStore
 }

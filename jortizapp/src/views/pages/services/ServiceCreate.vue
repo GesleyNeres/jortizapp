@@ -1,8 +1,8 @@
-<template>
-  <v-card class="mx-auto" >
+vu<template>
+  <v-card class="mx-auto">
     <v-toolbar color="" cards dark flat>
       <v-card-title class="text-h6 font-weight-regular">
-        Cadastro de Clientes
+        Cadastro de Serviços
       </v-card-title>
     </v-toolbar>
     <v-form ref="form" v-model="rules.form" class="pa-4 pt-6">
@@ -13,85 +13,28 @@
         color=""
         label="Nome"
       ></v-text-field>
-      <div class="row">
-        <v-col cols="4">
-          <v-text-field
-            v-model="input.phone"
-            :rules="[rules.numbers, rules.required]"
-            variant="filled"
-            color=""
-            label="Telefone"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="8">
-          <v-text-field
-            v-model="input.email"
-            :rules="[rules.email, rules.required]"
-            variant="filled"
-            color=""
-            label="Email"
-            type="email"
-          ></v-text-field>
-        </v-col>
-      </div>
-      <v-text-field
-        v-model="input.address"
-        variant="filled"
-        :rules="[rules.addresses, rules.required]"
-        color=""
-        label="Endereço"
-      ></v-text-field>
-      <div class="row">
-        <v-col cols="6">
-          <v-text-field
-            v-model="input.city"
-            variant="filled"
-            :rules="[rules.strings, rules.required]"
-            color=""
-            label="Cidade"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            v-model="input.state"
-            variant="filled"
-            :rules="[rules.strings, rules.required]"
-            color=""
-            label="Estado"
-          ></v-text-field>
-        </v-col>
-      </div>
-      <div class="row">
-        <v-col cols="6">
-          <v-text-field
-            v-model="input.cost"
-            variant="filled"
-            :rules="[rules.currencies, rules.required]"
-            color=""
-            label="Custo"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            v-model="input.total_revenue"
-            variant="filled"
-            :rules="[rules.currencies, rules.required]"
-            color=""
-            label="Total Revenue"
-          ></v-text-field>
-        </v-col>
-      </div>
       <v-textarea
-        v-model="input.details"
+        v-model="input.description"
         auto-grow
         variant="filled"
         color=""
-        label="Detalhes"
+        label="Descrição"
         :rules="[rules.required]"
         rows="1"
       ></v-textarea>
+      <div class="row">
+        <v-col cols="6">
+          <v-text-field
+            v-model="input.price"
+            variant="filled"
+            :rules="[rules.currencies, rules.required]"
+            color=""
+            label="Preço do Serviço"
+          ></v-text-field>
+        </v-col>
+      </div>
       <v-checkbox v-model="input.status" color="">
-        <template v-slot:label> Cliente ativo? </template>
+        <template v-slot:label> Serviço ativo? </template>
       </v-checkbox>
     </v-form>
     <v-card-actions>
@@ -101,7 +44,7 @@
         :disabled="!rules.form"
         :loading="rules.isLoading"
         color="primary"
-        @click="saveClient($refs.form)"
+        @click="saveService($refs.form)"
       >
         Salvar
       </v-btn>
@@ -125,7 +68,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 import stores from "@/stores/index.js";
-const client = stores.clientStore();
+const service = stores.serviceStore();
 
 const rules = reactive({
   strings: (v) =>
@@ -147,26 +90,20 @@ const rules = reactive({
 
 const input = reactive({
   name: undefined,
-  phone: undefined,
-  email: undefined,
-  address: undefined,
-  city: undefined,
-  state: undefined,
-  cost: undefined,
-  total_revenue: undefined,
-  details: undefined,
+  description: undefined,
+  price: undefined,
   status: true,
 });
 
-function saveClient(form) {
-  client
-    .saveClients(this.input)
+function saveService(form) {
+  service
+    .saveServices(this.input)
     .then((s) => {
-      rules.output = "Cliente salvo com sucesso!"
+      rules.output = "Serviço salvo com sucesso!"
       rules.dialog = true;
     })
     .catch((e) => {
-      rules.output = "Cliente não pode ser salvo! Tente novamente mais tarde."
+      rules.output = "Serviço não pode ser salvo! Tente novamente mais tarde."
       rules.dialog = true;
     })
     .finally(() => {

@@ -58,6 +58,27 @@ const router = [
                 path: 'services',
                 name: 'service',
                 component: () => import('../pages/services/ServiceView.vue'),
+                meta: {
+                    needsAuth: true
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'service-list',
+                        component: () => import('../pages/services/ServiceList.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    },
+                    {
+                        path: 'create',
+                        name: 'service-create',
+                        component: () => import('../pages/services/ServiceCreate.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    }
+                ]
             }/* ,
             {
                 path: 'services',

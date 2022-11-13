@@ -9,11 +9,8 @@ const http = axios.create(
 http.interceptors.request.use(async (config) => {
     
     try {
-        console.log("Intercep Request ", config)
         return config;
     } catch (error) {
-        console.log("Intercep Request error", error)
-        console.log('Error in http/index.js interceptor request');
         return false;
     }
 
@@ -21,11 +18,8 @@ http.interceptors.request.use(async (config) => {
 
 http.interceptors.response.use(async (response)=>{
     try {
-        console.log("Intercep Response ", response)
         return response.data
     } catch (error) {
-        console.log("Intercep Response error", error)
-        console.log("Error in http/index.js interceptor response")
         return false
     }
 })
