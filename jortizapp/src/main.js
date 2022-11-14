@@ -9,7 +9,9 @@ import * as bootstrap from "bootstrap/dist/css/bootstrap.min.css"
 import { 
     getLocalUserPersistent, setLocalUserPersistent, 
     getLocalClientsPersistent, setLocalClientsPersistent,
-    getLocalServicesPersistent, setLocalServicesPersistent
+    getLocalServicesPersistent, setLocalServicesPersistent,
+    getLocalEmployeesPersistent, setLocalEmployeesPersistent,
+    getLocalPaymentsPersistent, setLocalPaymentsPersistent
 } from '@/modules/services/index.js'
 
 loadFonts()
@@ -67,7 +69,7 @@ pinia.use((context) => {
 
   }
 
-/*   if (context.store.$id == 'employee') {
+  if (context.store.$id == 'employee') {
       
       const loginId = context.store.$id
 
@@ -81,24 +83,24 @@ pinia.use((context) => {
           setLocalEmployeesPersistent(loginId, state.employees)
       })
 
-  } */
+  }
 
-  /* if (context.store.$id == 'payslip') {
+  if (context.store.$id == 'payment') {
 
       const loginId = context.store.$id
 
-      const fromStorage = getLocalPayslipsPersistent(loginId)
+      const fromStorage = getLocalPaymentsPersistent(loginId)
 
       if (fromStorage) {
           context.store.$patch(fromStorage)
       }
 
       context.store.$subscribe((mutation, state) => {
-          setLocalPayslipsPersistent(loginId, state.payslips)
+          setLocalPaymentsPersistent(loginId, state.payments)
       })
 
   }
- */
+
 })
 
 app.use(pinia)

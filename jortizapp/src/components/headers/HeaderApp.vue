@@ -25,7 +25,7 @@
         <template v-slot:prepend>
           <v-icon>mdi-human-queue</v-icon>
         </template>
-        <router-link :to="{ name: 'employee' }" class="nav-link">Colaboradores</router-link>
+        <router-link :to="{ name: 'employee-list' }" class="nav-link">Colaboradores</router-link>
       </v-list-item>
       <v-list-item link>
         <template v-slot:prepend>
@@ -37,7 +37,7 @@
         <template v-slot:prepend>
           <v-icon>mdi-cash-check</v-icon>
         </template>
-        <router-link :to="{ name: 'payment' }" class="nav-link">Pagamentos</router-link>
+        <router-link :to="{ name: 'payment-list' }" class="nav-link">Pagamentos</router-link>
       </v-list-item>
       <v-list-item link>
         <template v-slot:prepend>

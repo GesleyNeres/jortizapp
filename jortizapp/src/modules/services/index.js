@@ -13,10 +13,8 @@ export const deleteLocalData = () => {
     localStorage.removeItem('client')
     localStorage.removeItem('service')
     localStorage.removeItem('NRSUSRAPP')
-    /* 
     localStorage.removeItem('employee')
-    localStorage.removeItem('payslip') */
-    /*  */
+    localStorage.removeItem('payment')
 }
 
 export const setLocalUserPersistent = (id, data) => localStorage.setItem(id,serializer.serialize(data))
@@ -30,3 +28,13 @@ export const getLocalClientsPersistent = (id) => serializer.deserialize(localSto
 export const setLocalServicesPersistent = (id, data) => localStorage.setItem(id,serializer.serialize(data))
 
 export const getLocalServicesPersistent = (id) => serializer.deserialize(localStorage.getItem(id))
+
+export const getLocalEmployeesPersistent = (id) => serializer.deserialize(localStorage.getItem(id))
+
+export const setLocalEmployeesPersistent = (id, data) => localStorage.setItem(id,serializer.serialize(data))
+
+export const getLocalPaymentsPersistent = (id) => serializer.deserialize(localStorage.getItem(id))
+
+export const setLocalPaymentsPersistent = (id, data) => localStorage.setItem(id,serializer.serialize(data))
+
+

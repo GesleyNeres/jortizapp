@@ -44,7 +44,25 @@ const router = [
                 component: () => import('../pages/employees/EmployeeView.vue'),
                 meta: {
                     needsAuth: true
-                }
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'employee-list',
+                        component: () => import('../pages/employees/EmployeeList.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    },
+                    {
+                        path: 'create',
+                        name: 'employee-create',
+                        component: () => import('../pages/employees/EmployeeCreate.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    }
+                ]
             },
             {
                 path: 'payments',
@@ -52,7 +70,33 @@ const router = [
                 component: () => import('../pages/payments/PaymentView.vue'),
                 meta: {
                     needsAuth: true
-                }
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'payment-list',
+                        component: () => import('../pages/payments/PaymentList.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    },
+                    {
+                        path: 'create',
+                        name: 'payment-create',
+                        component: () => import('../pages/payments/PaymentCreate.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    },
+                    {
+                        path: 'report',
+                        name: 'payment-report',
+                        component: () => import('../pages/payments/PaymentReport.vue'),
+                        meta: {
+                            needsAuth: true
+                        }
+                    }
+                ]
             },
             {
                 path: 'services',
@@ -79,15 +123,7 @@ const router = [
                         }
                     }
                 ]
-            }/* ,
-            {
-                path: 'services',
-                name: 'service',
-                component: () => import('../pages/services/ServiceView.vue'),
-                meta: {
-                    needsAuth: true
-                }
-            } */
+            }
         ]
     },
     {
