@@ -9,7 +9,16 @@ export const serviceStore = defineStore({
         services: [],
     }),
     getters: {
-        countServices: (state) => state.services.length || null
+        countServices: (state) => {
+            return state.services.length || null
+        },
+        nameServices: (state) => {
+            const nameServices = []
+            state.services.forEach(e=>{
+                nameServices.push({id: e.id, name: e.name})
+            })
+            return nameServices
+        }
     },
     actions: {
         async loadServices() {

@@ -9,7 +9,16 @@ export const employeeStore = defineStore({
         employees: [],
     }),
     getters: {
-        countEmployees: (state) => state.employees.length || null
+        countEmployees: (state) => {
+            return state.employees.length || null
+        },
+        nameEmployees: (state) => {
+            const nameEmployees = []
+            state.employees.forEach(e=>{
+                nameEmployees.push({id: e.id, name: e.name})
+            })
+            return nameEmployees
+        }
     },
     actions: {
         async loadEmployees() {

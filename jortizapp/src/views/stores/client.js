@@ -9,7 +9,16 @@ export const clientStore = defineStore({
         clients: [],
     }),
     getters: {
-        countClients: (state) => state.clients.length || null
+        countClients: (state) => {
+            return state.clients.length || null
+        },
+        nameClients: (state) => {
+            const nameClients = []
+            state.clients.forEach(e => {
+                nameClients.push({ id: e.id, name: e.name, total_revenue: e.total_revenue })
+            })
+            return nameClients
+        }
     },
     actions: {
         async loadClients() {
@@ -18,38 +27,38 @@ export const clientStore = defineStore({
                     if (getLocalClientsPersistent('client')) {
                         console.log("Carregado do persistente")
                         this.clients = getLocalClientsPersistent('client')
-                    }else{
+                    } else {
                         setBearerToken(getLocalToken())
-                        const {data} = await http.get('/clients')
+                        const { data } = await http.get('/clients')
                         this.clients = data
                     }
                     resolve()
                 } catch (error) {
-                    const {response} = error
+                    const { response } = error
                     if (response) {
                         reject(response.data.error)
-                    }else{
+                    } else {
                         reject("Internal Error. Please, try again later.")
                     }
                 }
             }
             )
         },
-        async saveClients(form_data){
+        async saveClients(form_data) {
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
                     console.log("Token ", getLocalToken())
-                    const {data} = await http.post('/clients', form_data)
+                    const { data } = await http.post('/clients', form_data)
                     form_data.uuid = data
                     this.clients.push(form_data)
                     setLocalClientsPersistent('client', this.clients)
                     resolve('Cliente cadastrado com sucesso.')
                 } catch (error) {
-                    const {response} = error
+                    const { response } = error
                     if (response) {
                         reject(response.data.error)
-                    }else{
+                    } else {
                         reject("Internal Error. Please, try again later.")
                     }
                 }
