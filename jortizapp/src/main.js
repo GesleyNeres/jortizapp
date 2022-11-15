@@ -50,7 +50,6 @@ pinia.use((context) => {
           setLocalClientsPersistent(loginId, state.clients)
       })
 
-      console.log("Passando em main pinia como client: > ", fromStorage)
   }
 
   if (context.store.$id == 'service') {

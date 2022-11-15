@@ -25,7 +25,6 @@ export const clientStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalClientsPersistent('client')) {
-                        console.log("Carregado do persistente")
                         this.clients = getLocalClientsPersistent('client')
                     } else {
                         setBearerToken(getLocalToken())
@@ -48,7 +47,6 @@ export const clientStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
-                    console.log("Token ", getLocalToken())
                     const { data } = await http.post('/clients', form_data)
                     form_data.uuid = data
                     this.clients.push(form_data)

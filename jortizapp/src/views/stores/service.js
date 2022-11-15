@@ -25,7 +25,6 @@ export const serviceStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalServicesPersistent('service')) {
-                        console.log("Carregado do persistente")
                         this.services = getLocalServicesPersistent('service')
                     }else{
                         setBearerToken(getLocalToken())
@@ -48,7 +47,6 @@ export const serviceStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
-                    console.log("Token ", getLocalToken())
                     const {data} = await http.post('/services', form_data)
                     form_data.uuid = data
                     this.services.push(form_data)

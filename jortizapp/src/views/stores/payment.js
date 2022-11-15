@@ -16,7 +16,6 @@ export const paymentStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalPaymentsPersistent('payment')) {
-                        console.log("Carregado do persistente payment")
                         this.payments = getLocalPaymentsPersistent('payment')
                     }else{
                         setBearerToken(getLocalToken())
@@ -35,14 +34,13 @@ export const paymentStore = defineStore({
             }
             )
         },
-        async savePayments(form_data){
+        async savePayments(form_data, internal_data){
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
-                    console.log("Token ", getLocalToken())
                     const {data} = await http.post('/payslips', form_data)
-                    form_data.uuid = data
-                    this.payments.push(form_data)
+                    internal_data.uuid = data
+                    this.payments.push(internal_data)
                     setLocalPaymentsPersistent('payment', this.payments)
                     resolve('Pagamento cadastrado com sucesso.')
                 } catch (error) {

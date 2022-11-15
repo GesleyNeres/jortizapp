@@ -37,7 +37,6 @@ export const userStore = defineStore({
         async doLogout() {
             return new Promise(async (resolve, reject) => {
                 try {
-                    console.log("calling logout...")
                     deleteLocalData()
                     this.user = {} 
                     resolve()

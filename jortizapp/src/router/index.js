@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {default as modules} from '../modules/routes/index'
-import {default as views} from '../views/routes/index'
+import { default as modules } from '../modules/routes/index'
+import { default as views } from '../views/routes/index'
 import userStore from "@/stores/index";
 
 const router = createRouter({
@@ -12,7 +12,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  console.log("Before Each")
   if (to.name !== 'login' && !userStore.userStore().hasToken) {
     try {
       await userStore.userStore().checkToken()
@@ -28,9 +27,8 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next()
     }
-    
   }
-  
+
 }
 )
 

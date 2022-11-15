@@ -25,7 +25,6 @@ export const employeeStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalEmployeesPersistent('employee')) {
-                        console.log("Carregado do persistente employee")
                         this.employees = getLocalEmployeesPersistent('employee')
                     }else{
                         setBearerToken(getLocalToken())
@@ -48,7 +47,6 @@ export const employeeStore = defineStore({
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())
-                    console.log("Token ", getLocalToken())
                     const {data} = await http.post('/employees', form_data)
                     form_data.uuid = data
                     this.employees.push(form_data)
