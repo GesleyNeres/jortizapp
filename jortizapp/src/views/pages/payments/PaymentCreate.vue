@@ -1,4 +1,6 @@
 <template>
+<div>{{internal}}</div>
+<div>{{input}}</div>
   <v-card class="mx-auto">
     <v-toolbar color="" cards dark flat>
       <v-card-title class="text-h6 font-weight-regular">
@@ -212,7 +214,7 @@
         :loading="rules.isLoading"
         color="primary"
         @click="savePayment()"
-      >
+      ><!-- :disabled="!rules.form" -->
         Salvar
       </v-btn>
     </v-card-actions>
@@ -401,5 +403,6 @@ function reset(){
 
 </script>
 
-<style>
+<style scoped>
+
 </style>

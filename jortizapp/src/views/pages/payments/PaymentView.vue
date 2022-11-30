@@ -1,25 +1,24 @@
 <template>
   <div class="container pt-4">
     <div class="row">
-      <div class="col-md-2 d-flex flex-column">
-        <v-btn variant="outlined">
-          <router-link :to="{ name: 'payment-list' }" class="nav-link"
+      <div class="col-md-2 d-flex flex-column no-print">
+        
+          <router-link :to="{ name: 'payment-list' }" type="button" class="btn btn-light"
             >Listar</router-link
           >
-        </v-btn>
-
+        
         <v-divider></v-divider>
-        <v-btn variant="outlined">
-          <router-link :to="{ name: 'payment-create' }" class="nav-link"
+        
+          <router-link :to="{ name: 'payment-create' }" type="button" class="btn btn-light"
             >Criar</router-link
           >
-        </v-btn>
+        
         <v-divider></v-divider>
-        <v-btn variant="outlined">
-          <router-link :to="{ name: 'payment-report' }" class="nav-link"
+        
+          <router-link :to="{ name: 'payment-report' }" type="button" class="btn btn-light"
             >Relatório</router-link
           >
-        </v-btn>
+        
       </div>
       <div class="col-md-10">
         <router-view />
@@ -32,4 +31,9 @@
 </script>
 
 <style scoped>
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
 </style>

@@ -2,11 +2,7 @@
   <v-sheet class="appFormContainer" rounded>
     <v-card class="mx-auto px-6 py-8" width="450">
       <div>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-          height="200px"
-          cover
-        ></v-img>
+        <v-img src="images/jortiz.png" height="200px" cover></v-img>
         <v-divider></v-divider>
       </div>
       <v-form v-model="formData.form" @submit.prevent="onSubmit">
@@ -29,21 +25,23 @@
           required
         ></v-text-field>
         <br />
-
-        <v-btn
-          :disabled="!formData.form"
-          :loading="formData.loading"
-          block
-          size="large"
-          type="submit"
-          variant="elevated"
-          class="appColor"
-        >
-          Sign In
-        </v-btn>
+        <div class="d-grid gap-2">
+          <button
+            :disabled="!formData.form"
+            :loading="formData.loading"
+            class="btn btn-primary appColor"
+          >
+            Entrar
+          </button>
+        </div>
         <v-divider></v-divider>
-        <v-alert prominent type="error" variant="outlined" v-if="formData.output">
-          {{formData.output}}
+        <v-alert
+          prominent
+          type="error"
+          variant="outlined"
+          v-if="formData.output"
+        >
+          {{ formData.output }}
         </v-alert>
       </v-form>
     </v-card>
@@ -64,16 +62,16 @@ function onSubmit() {
 
   user
     .doLogin(formData.email, formData.password)
-    .then(s=>{
-      router.push('/dashboards')
+    .then((s) => {
+      router.push("/dashboards");
     })
     .catch((e) => {
-      formData.output = e
+      formData.output = e;
     })
     .finally(() => {
-      setTimeout(()=>{
-        formData.output = null
-      },3000)
+      setTimeout(() => {
+        formData.output = null;
+      }, 3000);
       formData.loading = false;
     });
 }

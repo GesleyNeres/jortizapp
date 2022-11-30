@@ -19,11 +19,11 @@ router.beforeEach(async (to, from, next) => {
       next({ path: to.path })
 
     } catch (err) {
-      next({ name: 'login' })
+      next({ path: 'login' })
     }
   } else {
     if (to.name === 'login' && userStore.userStore().hasToken) {
-      next({ name: '' })/* If error set back as dashboard */
+      next({ path: '/dashboards' })/* If error set back as dashboard */
     } else {
       next()
     }

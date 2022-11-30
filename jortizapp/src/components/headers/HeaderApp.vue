@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-sheet color="grey-lighten-4" class="pa-4">
-      <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
-
-      <div>{{user.user.email}}</div>
+      <!-- <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar> -->
+      <div>Usuário logado {{user.user.email}}</div>
     </v-sheet>
 
     <v-divider></v-divider>
@@ -39,11 +38,11 @@
         </template>
         <router-link :to="{ name: 'payment-list' }" class="nav-link">Pagamentos</router-link>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link @click="doLogout">
         <template v-slot:prepend>
           <v-icon>mdi-logout-variant</v-icon>
         </template>
-        <a type="button" class="nav-link" @click="doLogout">Sair</a>
+        <a type="button" class="nav-link">Sair</a>
       </v-list-item>
     </v-list>
   </div>
@@ -76,5 +75,6 @@ onMounted(()=>{
 
 </script>
 
-<style>
+<style scoped>
+
 </style>

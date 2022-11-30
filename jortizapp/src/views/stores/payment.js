@@ -16,26 +16,16 @@ export const paymentStore = defineStore({
         countPayments: (state) => {
             return state.payments.length || null
         },
-        paymentReportSunday(){
-            return this.reports.filter(el=> el.weekday === "Sunday")
-        },
-        paymentReportMonday(){
-            return this.reports.filter(el=> el.weekday === "Monday")
-        },
-        paymentReportTuesday(){
-            return this.reports.filter(el=> el.weekday === "Tuesday")
-        },
-        paymentReportWednesday(){
-            return this.reports.filter(el=> el.weekday === "Wednesday")
-        },
-        paymentReportThursday(){
-            return this.reports.filter(el=> el.weekday === "Thursday")
-        },
-        paymentReportFriday(){
-            return this.reports.filter(el=> el.weekday === "Friday")
-        },
-        paymentReportSaturday(){
-            return this.reports.filter(el=> el.weekday === "Saturday")
+        paymentReportTotal: (state)=>{
+            let tips = 0
+            let gas = 0
+            let gains = 0
+            state.reports.forEach(element=>{
+                tips+= parseFloat(element.employee_tips) 
+                gas+= parseFloat(element.employee_gas_price)
+                gains += parseFloat(element.employee_gains)
+            })
+            return tips + gas + gains
         },
         paymentReportTipsEmployee(){
             let total = 0

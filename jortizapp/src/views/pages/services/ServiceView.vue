@@ -2,18 +2,14 @@
   <div class="container pt-4">
     <div class="row">
       <div class="col-md-2 d-flex flex-column">
-        <v-btn variant="outlined">
-          <router-link :to="{ name: 'service-list' }" class="nav-link"
+          <router-link :to="{ name: 'service-list' }" type="button" class="btn btn-light"
             >Listar</router-link
           >
-        </v-btn>
 
         <v-divider></v-divider>
-        <v-btn variant="outlined">
-          <router-link :to="{ name: 'service-create' }" class="nav-link"
+          <router-link :to="{ name: 'service-create' }" type="button" class="btn btn-light"
             >Criar</router-link
           >
-        </v-btn>
       </div>
       <div class="col-md-10">
         <router-view />

@@ -38,26 +38,35 @@ vu<template>
       </v-checkbox>
     </v-form>
     <v-card-actions>
-      <v-btn variant="text" @click="$refs.form.reset()"> Limpar </v-btn>
+      <button vclass="btn btn-light" type="button" @click="$refs.form.reset()">
+        Limpar
+      </button>
       <v-spacer></v-spacer>
-      <v-btn
+      <button
+        type="button"
         :disabled="!rules.form"
         :loading="rules.isLoading"
-        color="primary"
+        class="btn btn-primary"
         @click="saveService($refs.form)"
       >
         Salvar
-      </v-btn>
+      </button>
     </v-card-actions>
     <div class="text-center">
       <!-- <v-btn color="primary"> Open Dialog </v-btn> -->
       <v-dialog v-model="rules.dialog" activator="parent" type="error">
         <v-card>
           <v-card-text>
-            <span>{{rules.output}}</span>
+            <span>{{ rules.output }}</span>
           </v-card-text>
           <v-card-actions class="d-grid">
-            <button type="button" class="btn btn-primary block" @click="rules.dialog = false">FECHAR</button>
+            <button
+              type="button"
+              class="btn btn-primary block"
+              @click="rules.dialog = false"
+            >
+              FECHAR
+            </button>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -99,15 +108,15 @@ function saveService(form) {
   service
     .saveServices(this.input)
     .then((s) => {
-      rules.output = "Serviço salvo com sucesso!"
+      rules.output = "Serviço salvo com sucesso!";
       rules.dialog = true;
     })
     .catch((e) => {
-      rules.output = "Serviço não pode ser salvo! Tente novamente mais tarde."
+      rules.output = "Serviço não pode ser salvo! Tente novamente mais tarde.";
       rules.dialog = true;
     })
     .finally(() => {
-      form.reset()
+      form.reset();
     });
 }
 </script>

@@ -6,12 +6,13 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 /* import * as bootstrap from 'bootstrap' */
 import * as bootstrap from "bootstrap/dist/css/bootstrap.min.css"
-import { 
+import { deleteLocalData,
     getLocalUserPersistent, setLocalUserPersistent, 
     getLocalClientsPersistent, setLocalClientsPersistent,
     getLocalServicesPersistent, setLocalServicesPersistent,
     getLocalEmployeesPersistent, setLocalEmployeesPersistent,
-    getLocalPaymentsPersistent, setLocalPaymentsPersistent
+    getLocalPaymentsPersistent, setLocalPaymentsPersistent,
+    getLocalApplicationPersistent, setLocalApplicationPersistent
 } from '@/modules/services/index.js'
 
 loadFonts()
@@ -19,6 +20,18 @@ loadFonts()
 const app = createApp(App)
 const pinia = createPinia()
 
+/* If token is expired, it delete all local storage */
+if (getLocalUserPersistent('user') && getLocalUserPersistent('user').user.tokens) {
+    let tkn = getLocalUserPersistent('user').user.tokens
+    tkn = String(tkn).split('.')[1]
+    tkn = JSON.parse(atob(tkn))
+    if (tkn.exp < new Date()/1000) {
+        console.log("EXPIRED");
+        deleteLocalData()
+    }else{
+        console.log("VALID");
+    }   
+}
 pinia.use((context) => {
     
   if (context.store.$id == 'user') {
@@ -99,6 +112,22 @@ pinia.use((context) => {
       })
 
   }
+
+  if (context.store.$id == 'application') {
+
+    const loginId = context.store.$id
+
+    const fromStorage = getLocalApplicationPersistent(loginId)
+
+    if (fromStorage) {
+        context.store.$patch(fromStorage)
+    }
+
+    context.store.$subscribe((mutation, state) => {
+        setLocalApplicationPersistent(loginId, state.application)
+    })
+
+}
 
 })
 

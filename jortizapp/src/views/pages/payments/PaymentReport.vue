@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto">
-    <v-toolbar color="" cards dark flat>
+  <v-card class="mx-auto p-2 printable">
+    <v-toolbar cards dark flat>
       <v-card-title class="text-h6 font-weight-regular">
         Controle de Pagamentos
       </v-card-title>
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="row">
-      <v-form ref="form" lazy-validation class="pa-4 pt-6">
+      <v-form ref="form" lazy-validation class="col-12 pa-4 pt-6">
         <div class="row">
           <v-col cols="4">
             <v-select
@@ -43,211 +43,173 @@
             ></v-text-field>
           </v-col>
           <v-col>
-            <v-btn
-              color="primary"
-              :loading="rules.isLoading"
-              @click="searchPayment()"
-            >
-              Salvar
-            </v-btn>
+            <button type="button" class="btn btn-primary no-print" :loading="rules.isLoading" @click="searchPayment()">Buscar</button>
           </v-col>
         </div>
+      </v-form>
+      <div class="col-12">
         <div class="row">
-          <v-table fixed-header height="300px" v-if="payment.hasReports">
-            <thead>
-              <tr>
-                <th>Index</th>
-                <th class="text-left">Segunda</th>
-                <th class="text-left">Terça</th>
-                <th class="text-left">Quarta</th>
-                <th class="text-left">Quinta</th>
-                <th class="text-left">Sexta</th>
-                <th class="text-left">Sábado</th>
-                <th class="text-left">Domingo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in payment.reports" :key="index">
-                <td>{{index}}</td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportMonday[index]"
+          <div class="table table-responsive">
+            <table v-if="payment.hasReports" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-left">Segunda</th>
+                  <th class="text-left">Terça</th>
+                  <th class="text-left">Quarta</th>
+                  <th class="text-left">Quinta</th>
+                  <th class="text-left">Sexta</th>
+                  <th class="text-left">Sábado</th>
+                  <th class="text-left">Domingo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in payment.reports" :key="index">
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Monday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Tuesday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Wednesday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Thursday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Friday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Saturday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                  <td class="table-text" style="width: 14%">
+                    <p v-if="item.weekday === 'Sunday'">
+                      {{ item.client }}
+                      <span class="text-primary"
+                        >${{ item.employee_gains }}</span
+                      >
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalMonday"
                   >
-                    {{ payment.paymentReportMonday[index].client }}
-                    <span v-if="payment.paymentReportMonday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportMonday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalMonday).toFixed(2)
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportTuesday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalTuesday"
                   >
-                    {{ payment.paymentReportTuesday[index].client }}
-                    <span v-if="payment.paymentReportTuesday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportTuesday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalTuesday).toFixed(2)
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportWednesday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalWednesday"
                   >
-                    {{ payment.paymentReportWednesday[index].client }}
-                    <span v-if="payment.paymentReportWednesday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportWednesday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalWednesday).toFixed(
+                          2
+                        )
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportThursday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalThursday"
                   >
-                    {{ payment.paymentReportThursday[index].client }}
-                    <span v-if="payment.paymentReportThursday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportThursday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalThursday).toFixed(
+                          2
+                        )
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportFriday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalFriday"
                   >
-                    {{ payment.paymentReportFriday[index].client }}
-                    <span v-if="payment.paymentReportFriday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportFriday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalFriday).toFixed(2)
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportSaturday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalSaturday"
                   >
-                    {{ payment.paymentReportSaturday[index].client }}
-                    <span v-if="payment.paymentReportSaturday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportSaturday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalSaturday).toFixed(
+                          2
+                        )
                       }}
-                    </span>
-                  </p>
-                </td>
-                <td class="table-text">
-                  <p
-                    class="text-primary"
-                    v-if="payment.paymentReportSunday[index]"
+                    </p>
+                  </td>
+                  <td
+                    class="table-text"
+                    v-if="payment.paymentReportTotalSunday"
                   >
-                    {{ payment.paymentReportSunday[index].client }}
-                    <span v-if="payment.paymentReportSunday[index]">
+                    <p>
                       ${{
-                        parseFloat(
-                          payment.paymentReportSunday[index].employee_gains
-                        ).toFixed(2)
+                        parseFloat(payment.paymentReportTotalSunday).toFixed(2)
                       }}
-                    </span>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>Total</td>
-                <td class="table-text" v-if="payment.paymentReportTotalMonday">
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalMonday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-                <td
-                  class="table-text"
-                  v-if="payment.paymentReportTotalTuesday"
-                >
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalTuesday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-                <td
-                  class="table-text"
-                  v-if="payment.paymentReportTotalWednesday"
-                >
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalWednesday).toFixed(
-                        2
-                      )
-                    }}
-                  </p>
-                </td>
-                <td
-                  class="table-text"
-                  v-if="payment.paymentReportTotalThursday"
-                >
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalThursday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-                <td class="table-text" v-if="payment.paymentReportTotalFriday">
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalFriday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-                <td
-                  class="table-text"
-                  v-if="payment.paymentReportTotalSaturday"
-                >
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalSaturday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-                <td class="table-text" v-if="payment.paymentReportTotalSunday">
-                  <p>
-                    ${{
-                      parseFloat(payment.paymentReportTotalSunday).toFixed(2)
-                    }}
-                  </p>
-                </td>
-              </tr>
-            </tfoot>
-          </v-table>
+                    </p>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
         <div class="row">
-           <table class="table app-report-additional table-striped table-bordered">
+          <table
+            class="table app-report-additional table-striped table-bordered"
+            v-if="payment.paymentReportTipsEmployee > 0"
+          >
             <thead>
               <tr>
                 <th class="table-text-head">Cliente</th>
@@ -256,8 +218,12 @@
             </thead>
             <tbody>
               <tr v-for="(item, index) in payment.reports" :key="index">
-                <td class="table-text" v-if="item.employee_tips > 0">{{ item.client }}</td>
-                <td class="table-text" v-if="item.employee_tips > 0">$ {{ item.employee_tips }}</td>
+                <td class="table-text" v-if="item.employee_tips > 0">
+                  {{ item.client }}
+                </td>
+                <td class="table-text" v-if="item.employee_tips > 0">
+                  $ {{ item.employee_tips }}
+                </td>
               </tr>
             </tbody>
             <tfoot>
@@ -269,14 +235,37 @@
               </tr>
             </tfoot>
           </table>
+          <span v-if="payment.paymentReportTipsEmployee <= 0">
+            Nenhuma 'Tip' reportada.
+          </span>
         </div>
+        <!-- Tips -->
         <div class="row">
-          <p v-if="payment.reports" class="table-text">
+          <p v-if="payment.paymentReportGasEmployee > 0" class="table-text">
             Gasolina <span>$ {{ payment.paymentReportGasEmployee }}</span>
           </p>
+          <p v-if="!payment.paymentReportGasEmployee <= 0">
+            Nenhum custo com gasolina reportado.
+          </p>
         </div>
-      </v-form>
+        <!-- Gas cost -->
+      </div>
     </div>
+    <div class="row signature">
+      <v-col cols="3" v-if="payment.paymentReportTotal">
+        <span>Recebido: ${{parseFloat(payment.paymentReportTotal).toFixed(2)}} </span>
+      </v-col>
+      <v-col cols="4">
+        <span>Assinatura:__________________________</span>
+      </v-col>
+      <v-col cols="3">
+        <span>Data:___/___/_____</span>
+      </v-col>
+      <v-col cols="2">
+        <button type="button" class="btn btn-primary no-print" :loading="rules.isLoading" @click="printPayment()">Imprimir</button>
+      </v-col>
+    </div>
+    <!-- Sign and Date -->
   </v-card>
 </template>
 
@@ -311,7 +300,10 @@ const rules = reactive({
 });
 
 function searchPayment() {
-  payment
+  if (!input.employeeName || !input.startDate || !input.endDate ) {
+    alert("Informe o colaborador, data de início e e fim.")
+  }else{
+    payment
     .searchPayments(this.input)
     .then((s) => {
       console.log("Sucesso.. ", s);
@@ -319,8 +311,38 @@ function searchPayment() {
     .catch((e) => {
       console.log("Erro.. ", e);
     });
+  }
+  
+}
+function printPayment(){
+  window.print()
 }
 </script>
 
-<style>
+<style scoped>
+@media print {
+  * {
+    font-size: 10pt !important;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .printable {
+    padding: 2px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  .signature {
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+  }
+}
 </style>

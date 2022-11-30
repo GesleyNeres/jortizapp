@@ -4,35 +4,45 @@
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            src="../../../public/images/clients.png"
             height="200px"
             cover
           ></v-img>
           <v-card-item>
             <div>
               <div class="text-overline mb-1">Clientes</div>
-              <div class="text-h6 mb-1">Headline</div>
+              <div class="text-h6 mb-1">Clientes da Companhia</div>
               <div class="text-caption">
-                Greyhound divisely hello coldly fonwderfully
+                Clientes atualmente ativos
               </div>
             </div>
           </v-card-item>
 
           <v-card-actions>
-            <v-btn variant="outlined"> Button </v-btn>
+            <router-link
+              :to="{ name: 'client-list' }"
+              variant="outlined"
+              type="button"
+              class="btn btn-primary"
+            >
+              Clientes ativos
+              <span class="badge text-bg-secondary">
+                {{ application.application.clients_count }}
+              </span>
+            </router-link>
           </v-card-actions>
         </v-card>
       </div>
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            src="../../../public/images/employees.jpg"
             height="200px"
             cover
           ></v-img>
           <v-card-item>
             <div>
-              <div class="text-overline mb-1">Fornecedores</div>
+              <div class="text-overline mb-1">Colaboradores</div>
               <div class="text-h6 mb-1">Headline</div>
               <div class="text-caption">
                 Greyhound divisely hello coldly fonwderfully
@@ -41,14 +51,23 @@
           </v-card-item>
 
           <v-card-actions>
-            <v-btn variant="outlined"> Button </v-btn>
+            <router-link
+              :to="{ name: 'employee-list' }"
+              variant="outlined"
+              type="button"
+              class="btn btn-primary"
+              >Colaboradores ativos
+              <span class="badge text-bg-secondary">
+                {{ application.application.employees_count }}
+              </span>
+            </router-link>
           </v-card-actions>
         </v-card>
       </div>
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            src="../../../public/images/services.jpg"
             height="200px"
             cover
           ></v-img>
@@ -63,23 +82,33 @@
           </v-card-item>
 
           <v-card-actions>
-            <v-btn variant="outlined"> Button </v-btn>
+            <router-link
+              :to="{ name: 'service-list' }"
+              variant="outlined"
+              type="button"
+              class="btn btn-primary"
+            >
+              Serviços ativos
+              <span class="badge text-bg-secondary">
+                {{ application.application.services_count }}
+              </span>
+            </router-link>
           </v-card-actions>
         </v-card>
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="row">
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            src="../../../public/images/payments.jpg"
             height="200px"
             cover
           ></v-img>
           <v-card-item>
             <div>
-              <div class="text-overline mb-1">Clientes</div>
+              <div class="text-overline mb-1">Pagamentos</div>
               <div class="text-h6 mb-1">Headline</div>
               <div class="text-caption">
                 Greyhound divisely hello coldly fonwderfully
@@ -88,7 +117,17 @@
           </v-card-item>
 
           <v-card-actions>
-            <v-btn variant="outlined"> Button </v-btn>
+            <router-link
+              :to="{ name: 'payment-list' }"
+              variant="outlined"
+              type="button"
+              class="btn btn-primary"
+            >
+              Pagamentos ativos
+              <span class="badge text-bg-secondary">
+                {{ application.application.payslips_count }}
+              </span>
+            </router-link>
           </v-card-actions>
         </v-card>
       </div>
@@ -96,8 +135,12 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref, reactive } from "vue";
+import stores from "@/stores/index.js";
+const application = stores.applicationStore();
+
+application.loadApplication().then().catch();
 </script>
 
 <style>

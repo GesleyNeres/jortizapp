@@ -95,16 +95,16 @@
       </v-checkbox>
     </v-form>
     <v-card-actions>
-      <v-btn variant="text" @click="$refs.form.reset()"> Limpar </v-btn>
+      <button type="button" class="btn btn-light" @click="$refs.form.reset()"> Limpar </button>
       <v-spacer></v-spacer>
-      <v-btn
-        :disabled="!rules.form"
+      <button
+        type="button"
         :loading="rules.isLoading"
-        color="primary"
+        class="btn btn-primary"
         @click="saveClient($refs.form)"
       >
         Salvar
-      </v-btn>
+      </button>
     </v-card-actions>
     <div class="text-center">
       <!-- <v-btn color="primary"> Open Dialog </v-btn> -->
