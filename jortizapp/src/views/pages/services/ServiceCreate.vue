@@ -104,18 +104,18 @@ const input = reactive({
   status: true,
 });
 
-function saveService(form) {
-  service
-    .saveServices(this.input)
-    .then((s) => {
+async function saveService(form) {
+  await service
+    .saveServices(input)
+    .then(function(s){
       rules.output = "Serviço salvo com sucesso!";
       rules.dialog = true;
     })
-    .catch((e) => {
+    .catch(function(e){
       rules.output = "Serviço não pode ser salvo! Tente novamente mais tarde.";
       rules.dialog = true;
     })
-    .finally(() => {
+    .finally(function(){
       form.reset();
     });
 }

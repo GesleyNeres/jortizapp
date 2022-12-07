@@ -247,16 +247,16 @@ const client = stores.clientStore();
 const service = stores.serviceStore();
 const payment = stores.paymentStore();
 
-onMounted(() => {
+onMounted(function(){
   Promise.all([
     employee.loadEmployees(),
     client.loadClients(),
     service.loadServices(),
   ])
-    .then((s) => {
+    .then(function(s){
       
     })
-    .catch((e) => {
+    .catch(function(e){
       
     });
 });
@@ -363,17 +363,17 @@ function validateForm() {
 function savePayment() {
   rules.isLoading = true
   payment
-    .savePayments(this.input, this.internal)
-    .then((s) => {
+    .savePayments(input, internal)
+    .then(function(s){
       rules.output = "Pagamento salvo com sucesso!";
       rules.dialog = true;
     })
-    .catch((e) => {
+    .catch(function(e){
       rules.output =
         "Pagamento não pode ser salvo! Tente novamente mais tarde.";
       rules.dialog = true;
     })
-    .finally(() => {
+    .finally(function(){
       rules.isLoading = false
       this.reset()
       rules.form =false

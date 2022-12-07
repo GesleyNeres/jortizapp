@@ -33,12 +33,12 @@
 </template>
 
 <script setup>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted } from "vue";
 import stores from "@/stores/index.js";
 const service = stores.serviceStore();
 
 onMounted(() => {
-  service.loadServices().catch((e) => {
+  service.loadServices().catch(function(e){
     console.log("Erro para carregar serviços.");
   });
 });

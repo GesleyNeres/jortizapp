@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { http, setBearerToken } from '@/http'
 import { getLocalToken, getLocalServicesPersistent, setLocalServicesPersistent } from '@/modules/services'
-import router from "@/router/index"
+
 
 export const serviceStore = defineStore({
     id: 'service',
@@ -21,7 +21,7 @@ export const serviceStore = defineStore({
         }
     },
     actions: {
-        async loadServices() {
+        loadServices() {
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalServicesPersistent('service')) {
@@ -43,7 +43,7 @@ export const serviceStore = defineStore({
             }
             )
         },
-        async saveServices(form_data){
+        saveServices(form_data){
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())

@@ -50,7 +50,7 @@
 
 <script setup>
 import router from "@/router/index";
-import { onMounted } from "@vue/runtime-core"
+import { onMounted } from "vue"
 import userStore from "@/stores/index";
 const user = userStore.userStore();
 

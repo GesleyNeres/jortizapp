@@ -80,16 +80,16 @@ const input = reactive({
 
 function saveEmployee(form) {
   employee
-    .saveEmployees(this.input)
-    .then((s) => {
+    .saveEmployees(input)
+    .then(function(s){
       rules.output = "Colaborador salvo com sucesso!"
       rules.dialog = true;
     })
-    .catch((e) => {
+    .catch(function(e){
       rules.output = "Colaborador não pode ser salvo! Tente novamente mais tarde."
       rules.dialog = true;
     })
-    .finally(() => {
+    .finally(function(){
       form.reset()
     });
 }

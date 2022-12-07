@@ -270,21 +270,21 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 import stores from "@/stores/index.js";
 const employee = stores.employeeStore();
 const client = stores.clientStore();
 const service = stores.serviceStore();
 const payment = stores.paymentStore();
 
-onMounted(() => {
+onMounted(function () {
   Promise.all([
     employee.loadEmployees(),
     client.loadClients(),
     service.loadServices(),
   ])
-    .then((s) => {})
-    .catch((e) => {});
+    .then(function(s){})
+    .catch(function(e){});
 });
 
 const input = reactive({
@@ -304,11 +304,11 @@ function searchPayment() {
     alert("Informe o colaborador, data de início e e fim.")
   }else{
     payment
-    .searchPayments(this.input)
-    .then((s) => {
+    .searchPayments(input)
+    .then(function(s){
       console.log("Sucesso.. ", s);
     })
-    .catch((e) => {
+    .catch(function(e){
       console.log("Erro.. ", e);
     });
   }

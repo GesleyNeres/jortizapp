@@ -59,13 +59,13 @@
 </template>
 
 <script setup>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted } from "vue";
 import stores from "@/stores/index.js";
 
 const payment = stores.paymentStore();
 
 onMounted(() => {
-  payment.loadPayments().catch((e) => {
+  payment.loadPayments().catch(function(e){
     console.log("Erro para carregar colaboradores.");
   });
 });

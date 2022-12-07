@@ -26,10 +26,7 @@ if (getLocalUserPersistent('user') && getLocalUserPersistent('user').user.tokens
     tkn = String(tkn).split('.')[1]
     tkn = JSON.parse(atob(tkn))
     if (tkn.exp < new Date()/1000) {
-        console.log("EXPIRED");
         deleteLocalData()
-    }else{
-        console.log("VALID");
     }   
 }
 pinia.use((context) => {

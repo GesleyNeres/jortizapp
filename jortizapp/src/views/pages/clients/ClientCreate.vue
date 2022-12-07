@@ -160,16 +160,16 @@ const input = reactive({
 
 function saveClient(form) {
   client
-    .saveClients(this.input)
-    .then((s) => {
+    .saveClients(input)
+    .then(function(s){
       rules.output = "Cliente salvo com sucesso!"
       rules.dialog = true;
     })
-    .catch((e) => {
+    .catch(function(e){
       rules.output = "Cliente não pode ser salvo! Tente novamente mais tarde."
       rules.dialog = true;
     })
-    .finally(() => {
+    .finally(function(){
       form.reset()
     });
 }

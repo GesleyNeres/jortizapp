@@ -45,12 +45,12 @@
 </template>
 
 <script setup>
-import { onMounted } from "@vue/runtime-core";
+import { onMounted } from "vue";
 import stores from "@/stores/index.js";
 const client = stores.clientStore();
 
 onMounted(() => {
-  client.loadClients().catch((e) => {
+  client.loadClients().catch(function(e){
     console.log("Erro para carregar clientes.");
   });
 });
