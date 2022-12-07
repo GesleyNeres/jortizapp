@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="../../../public/images/clients.png"
+            src="/images/clients.png"
             height="200px"
             cover
           ></v-img>
@@ -36,7 +36,7 @@
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="../../../public/images/employees.jpg"
+            src="/images/employees.jpg"
             height="200px"
             cover
           ></v-img>
@@ -67,7 +67,7 @@
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="../../../public/images/services.jpg"
+            src="/images/services.jpg"
             height="200px"
             cover
           ></v-img>
@@ -102,7 +102,7 @@
       <div class="col-md-4">
         <v-card class="mx-auto" variant="outlined">
           <v-img
-            src="../../../public/images/payments.jpg"
+            src="/images/payments.jpg"
             height="200px"
             cover
           ></v-img>
