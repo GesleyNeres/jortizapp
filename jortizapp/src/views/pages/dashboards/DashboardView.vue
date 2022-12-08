@@ -43,9 +43,9 @@
           <v-card-item>
             <div>
               <div class="text-overline mb-1">Colaboradores</div>
-              <div class="text-h6 mb-1">Headline</div>
+              <div class="text-h6 mb-1">Colaboradores da Companhia</div>
               <div class="text-caption">
-                Greyhound divisely hello coldly fonwderfully
+                Colaboradores atualmente ativos
               </div>
             </div>
           </v-card-item>
@@ -74,9 +74,9 @@
           <v-card-item>
             <div>
               <div class="text-overline mb-1">Serviços</div>
-              <div class="text-h6 mb-1">Headline</div>
+              <div class="text-h6 mb-1">Serviços disponíveis na Companhia</div>
               <div class="text-caption">
-                Greyhound divisely hello coldly fonwderfully
+                Serviços atualmente ativos
               </div>
             </div>
           </v-card-item>
@@ -109,9 +109,9 @@
           <v-card-item>
             <div>
               <div class="text-overline mb-1">Pagamentos</div>
-              <div class="text-h6 mb-1">Headline</div>
+              <div class="text-h6 mb-1">Pagamentos realizados pela Companhia</div>
               <div class="text-caption">
-                Greyhound divisely hello coldly fonwderfully
+                Pagamentos ativos e relatórios
               </div>
             </div>
           </v-card-item>
@@ -136,11 +136,15 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import {onMounted } from "vue";
 import stores from "@/stores/index.js";
 const application = stores.applicationStore();
 
-application.loadApplication().then().catch();
+onMounted(function(){
+  application.loadApplication().then().catch();
+})
+
+
 </script>
 
 <style>

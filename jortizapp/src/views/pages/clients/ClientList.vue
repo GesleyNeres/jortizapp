@@ -50,9 +50,7 @@ import stores from "@/stores/index.js";
 const client = stores.clientStore();
 
 onMounted(() => {
-  client.loadClients().catch(function(e){
-    console.log("Erro para carregar clientes.");
-  });
+  client.loadClients().catch();
 });
 </script>
 

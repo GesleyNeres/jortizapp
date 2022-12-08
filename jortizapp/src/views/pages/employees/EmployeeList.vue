@@ -37,9 +37,7 @@ import stores from "@/stores/index.js";
 const employee = stores.employeeStore();
 
 onMounted(() => {
-  employee.loadEmployees().catch(function(e){
-    console.log("Erro para carregar colaboradores.");
-  });
+  employee.loadEmployees().catch();
 });
 </script>
 

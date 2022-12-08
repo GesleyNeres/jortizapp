@@ -65,9 +65,7 @@ import stores from "@/stores/index.js";
 const payment = stores.paymentStore();
 
 onMounted(() => {
-  payment.loadPayments().catch(function(e){
-    console.log("Erro para carregar colaboradores.");
-  });
+  payment.loadPayments().catch();
 });
 </script>
 

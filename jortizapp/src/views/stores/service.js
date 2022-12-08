@@ -21,7 +21,7 @@ export const serviceStore = defineStore({
         }
     },
     actions: {
-        loadServices() {
+        async loadServices() {
             return new Promise(async (resolve, reject) => {
                 try {
                     if (getLocalServicesPersistent('service')) {
@@ -43,7 +43,7 @@ export const serviceStore = defineStore({
             }
             )
         },
-        saveServices(form_data){
+        async saveServices(form_data){
             return new Promise(async (resolve, reject) => {
                 try {
                     setBearerToken(getLocalToken())

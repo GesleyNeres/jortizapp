@@ -305,12 +305,8 @@ function searchPayment() {
   }else{
     payment
     .searchPayments(input)
-    .then(function(s){
-      console.log("Sucesso.. ", s);
-    })
-    .catch(function(e){
-      console.log("Erro.. ", e);
-    });
+    .then()
+    .catch();
   }
   
 }

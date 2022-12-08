@@ -37,10 +37,8 @@ import { onMounted } from "vue";
 import stores from "@/stores/index.js";
 const service = stores.serviceStore();
 
-onMounted(() => {
-  service.loadServices().catch(function(e){
-    console.log("Erro para carregar serviços.");
-  });
+onMounted(function(){
+  service.loadServices().catch();
 });
 </script>
 
