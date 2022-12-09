@@ -6,7 +6,7 @@ import router from "@/router/index"
 export const applicationStore = defineStore({
     id: 'application',
     state: () => ({
-        application: {},
+        application: [],
     }),
     getters: {
         

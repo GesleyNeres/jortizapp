@@ -140,7 +140,7 @@ import {onMounted } from "vue";
 import stores from "@/stores/index.js";
 const application = stores.applicationStore();
 
-onMounted(function(){
+onMounted(()=>{
   application.loadApplication().then().catch();
 })
 

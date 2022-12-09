@@ -213,8 +213,8 @@
         :disabled="!rules.form"
         :loading="rules.isLoading"
         color="primary"
-        @click="savePayment()"
-      ><!-- :disabled="!rules.form" -->
+        @click="savePayment($refs.form)"
+      >
         Salvar
       </v-btn>
     </v-card-actions>
@@ -360,7 +360,7 @@ function validateForm() {
   }
 }
 
-function savePayment() {
+function savePayment(form) {
   rules.isLoading = true
   payment
     .savePayments(input, internal)
@@ -375,7 +375,7 @@ function savePayment() {
     })
     .finally(function(){
       rules.isLoading = false
-      this.reset()
+      form.reset()
       rules.form =false
     });
 }

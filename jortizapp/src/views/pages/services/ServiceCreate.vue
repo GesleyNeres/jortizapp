@@ -75,7 +75,7 @@ vu<template>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import {reactive } from "vue";
 import stores from "@/stores/index.js";
 const service = stores.serviceStore();
 
@@ -104,8 +104,8 @@ const input = reactive({
   status: true,
 });
 
-async function saveService(form) {
-  await service
+function saveService(form) {
+  service
     .saveServices(input)
     .then(function(s){
       rules.output = "Serviço salvo com sucesso!";
