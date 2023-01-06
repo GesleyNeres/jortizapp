@@ -1,6 +1,4 @@
 <template>
-<div>{{internal}}</div>
-<div>{{input}}</div>
   <v-card class="mx-auto">
     <v-toolbar color="" cards dark flat>
       <v-card-title class="text-h6 font-weight-regular">
